@@ -15,7 +15,7 @@ export const AppProvider = ({children}) =>{
     setSubmenu(true);
   }
   const closeSubmenu = () =>{
-    setSubmenu(true);
+    setSubmenu(false);
   }
   return <AppContext.Provider value={{isSlidebar,isSubmenu,setSlidebar,openSubmenu,closeSubmenu,coord,page}}>
     {children}

@@ -5,7 +5,7 @@ import { useGlobalContext } from './context'
 import sublinks from './data'
 
 const Navbar = () => {
-  const {isSlidebar,setSlidebar,openSubmenu,closeSubmenu} = useGlobalContext();
+  const {setSlidebar,openSubmenu,closeSubmenu} = useGlobalContext();
   const ShowSubmenu = (e) =>{
     const text = e.target.textContent;
     const tempBtn = e.target.getBoundingClientRect();
@@ -13,11 +13,13 @@ const Navbar = () => {
     const bottom = tempBtn.bottom - 3;
     openSubmenu(text,{center,bottom});
   }
-  const HideSubmenu = (e) =>{
-    closeSubmenu();
+  const handleSubmenu = (e) =>{
+    if(!e.target.classList.contains('link-btn')){
+      closeSubmenu();
+    }
   }
   return (
-    <nav className="nav">
+    <nav className="nav" onMouseOver={handleSubmenu}>
       <div className="nav-center">
         <div className="nav-header">
           <img src={logo} className="nav-logo" alt="" />
@@ -25,7 +27,7 @@ const Navbar = () => {
       </div>
       <ul className="nav-links" >
         {sublinks.map(({page},index)=>{
-          return <li key={index}><button onMouseOver={ShowSubmenu} onMouseLeave={HideSubmenu} className="link-btn">{page}</button></li>
+          return <li key={index}><button onMouseOver={ShowSubmenu} className="link-btn">{page}</button></li>
         })}
         {/* <li><button className="link-btn">products</button></li>
         <li><button className="link-btn">developers</button></li>
